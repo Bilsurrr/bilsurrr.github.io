@@ -1,1 +1,203 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Archive</title>
+<link rel="icon" type="image/png" href="your-icon.png">
+<style>
+@import url('https://fonts.googleapis.com/css2?family=Orbitron:wght@400;700&display=swap');
 
+* {
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+}
+
+body {
+  font-family: 'Orbitron', sans-serif;
+  background: linear-gradient(135deg, #1a0033, #3b0066);
+  color: #fff;
+  text-align: center;
+  min-height: 100vh;
+  overflow-x: hidden;
+}
+
+#particles {
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  z-index: 0;
+}
+
+h1 {
+  margin: 40px 0 20px;
+  font-size: 3rem;
+  text-shadow: 0 0 10px #6600cc, 0 0 20px #9933ff;
+  position: relative;
+  z-index: 1;
+}
+
+/* nav buttons */
+nav {
+  margin-bottom: 40px;
+  position: relative;
+  z-index: 1;
+}
+
+nav a {
+  display: inline-block;
+  margin: 10px;
+  padding: 12px 25px;
+  background-color: #4b0082;
+  color: white;
+  text-decoration: none;
+  border-radius: 8px;
+  box-shadow: 0 0 10px #4b0082;
+  transition: 0.3s;
+}
+
+nav a:hover {
+  background-color: #6a0dad;
+  box-shadow: 0 0 20px #ff00ff, 0 0 40px #6a0dad;
+}
+
+/* archive content */
+.archive-container {
+  width: 90%;
+  max-width: 1000px;
+  margin: 0 auto 60px;
+  position: relative;
+  z-index: 1;
+}
+
+.archive-item {
+  background: rgba(75, 0, 130, 0.4);
+  border-radius: 15px;
+  box-shadow: 0 0 15px #6600cc;
+  padding: 20px;
+  margin: 25px 0;
+  transition: 0.3s;
+}
+
+.archive-item:hover {
+  background: rgba(106, 13, 173, 0.6);
+  box-shadow: 0 0 25px #ff00ff, 0 0 40px #6600cc;
+}
+
+.archive-item img {
+  max-width: 100%;
+  border-radius: 10px;
+  margin: 15px 0;
+  box-shadow: 0 0 15px #9933ff;
+}
+
+.archive-item video {
+  max-width: 100%;
+  border-radius: 10px;
+  margin: 15px 0;
+  box-shadow: 0 0 15px #ff00ff;
+}
+
+.archive-item p {
+  font-size: 1rem;
+  margin-top: 10px;
+}
+</style>
+</head>
+<body>
+
+<canvas id="particles"></canvas>
+
+<h1>ARCHIVE</h1>
+
+<nav>
+  <a href="other.html">OTHER</a>
+  <a href="credits.html">CREDITS</a>
+  <a href="index.html">HOME</a>
+  <a href="placeholder.html">Placeholder</a>
+</nav>
+
+<div class="archive-container">
+
+  <div class="archive-item">
+    <h2>📸 Image Example</h2>
+    <img src="https://via.placeholder.com/600x300.png?text=Archive+Image+1" alt="Archive Image">
+    <p>This is a placeholder image stored in the archive. Replace with your own images.</p>
+  </div>
+
+  <div class="archive-item">
+    <h2>🎥 Video Example</h2>
+    <video controls>
+      <source src="https://www.w3schools.com/html/mov_bbb.mp4" type="video/mp4">
+      Your browser does not support HTML video.
+    </video>
+    <p>A sample MP4 video in the archive. Replace with your own video files.</p>
+  </div>
+
+  <div class="archive-item">
+    <h2>📝 Text Entry</h2>
+    <p>This archive section contains written notes or logs. You can expand these sections with more details, history, or saved content.</p>
+  </div>
+
+  <div class="archive-item">
+    <h2>📸 Another Image</h2>
+    <img src="https://via.placeholder.com/600x300.png?text=Archive+Image+2" alt="Archive Image 2">
+    <p>Another image placeholder in the archive collection.</p>
+  </div>
+
+</div>
+
+<script>
+// Particles background
+const canvas = document.getElementById('particles');
+const ctx = canvas.getContext('2d');
+canvas.width = window.innerWidth;
+canvas.height = window.innerHeight;
+
+const particles = [];
+for(let i=0; i<60; i++){
+  particles.push({
+    x: Math.random()*canvas.width,
+    y: Math.random()*canvas.height,
+    r: Math.random()*2+1,
+    dx: (Math.random()-0.5)*0.5,
+    dy: (Math.random()-0.5)*0.5,
+    color: `hsla(${Math.random()*260+240}, 70%, 60%, 0.5)`
+  });
+}
+
+function animate(){
+  ctx.clearRect(0,0,canvas.width,canvas.height);
+  particles.forEach(p=>{
+    p.x += p.dx;
+    p.y += p.dy;
+    if(p.x < 0 || p.x > canvas.width) p.dx *= -1;
+    if(p.y < 0 || p.y > canvas.height) p.dy *= -1;
+    ctx.fillStyle = p.color;
+    ctx.beginPath();
+    ctx.arc(p.x,p.y,p.r,0,Math.PI*2);
+    ctx.fill();
+  });
+  requestAnimationFrame(animate);
+}
+animate();
+
+window.addEventListener('resize', ()=>{
+  canvas.width = window.innerWidth;
+  canvas.height = window.innerHeight;
+});
+
+// Animate tab title
+const titles = ["a","ar","arc","arch","archi","archiv","archive"];
+let idx = 0;
+setInterval(()=>{
+  document.title = titles[idx];
+  idx = (idx+1) % titles.length;
+}, 500);
+</script>
+
+</body>
+</html>
