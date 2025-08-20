@@ -1,11 +1,10 @@
- 
 <!DOCTYPE html>
 <html lang="en">
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 <title></title> 
-<script type="text/javascript" src="https://gc.kis.v2.scr.kaspersky-labs.com/FD126C42-EBFA-4E12-B309-BB3FDD723AC1/main.js?attr=o01UhV-EYF4rosuQhftN1O9lzIUKZdwGjfD75kAVh9MSwE50c8C6VJ_O_0SO3IlgCNVIgujARhDgh-9wWd9tpYvNd4FB9WK3mbQjX362k54" charset="UTF-8"></script><style>
+<style>
   @import url('https://fonts.googleapis.com/css2?family=Orbitron:wght@400;700&display=swap');
 
   * { margin: 0; padding: 0; box-sizing: border-box; }
@@ -138,7 +137,7 @@
 
 <canvas id="particles"></canvas>
 
-<!-- Navigation buttons added here -->
+<!-- Navigation buttons -->
 <nav>
   <a href="index.html">HOME</a>
   <a href="credits.html">CREDITS</a>
@@ -151,25 +150,20 @@
   <!-- Audio entries -->
   <div class="audio">
     <img src="https://bigrat.monster/media/bigrat.jpg" alt="Audio">
-    <div class="audio-id" data-id="loadstring(game:HttpGet('https://raw.githubusercontent.com/Bilsurrr/Fluxus/refs/heads/main/fluxus', true))()
-">my roblox script</div>
+    <div class="audio-id" data-id="loadstring(game:HttpGet('https://raw.githubusercontent.com/Bilsurrr/Fluxus/refs/heads/main/fluxus', true))()">my roblox script</div>
     <button class="copy-btn">Copy Script</button>
   </div>
-</div>
 
-   <div class="audio">
-    <img src="IMAGE" alt="Audio">
-    <div class="audio-id" data-id="PLAECHOLDER
-">PLACEHOLDER</div>
-    <button class="copy-btn">Copy PLACEHOLDER</button>
+  <div class="audio">
+    <img src="IMAGE.COM" alt="Audio">
+    <div class="audio-id" data-id="PLACEHOLDER">PLACEHOLDER</div>
+    <button class="copy-btn">Copy Script</button>
   </div>
-</div>
 
-   <div class="audio">
+  <div class="audio">
     <img src="IMAGE" alt="Audio">
-    <div class="audio-id" data-id="PLAECHOLDER
-">PLACEHOLDER</div>
-    <button class="copy-btn">Copy PLACEHOLDER</button>
+    <div class="audio-id" data-id="PLACEHOLDER">PLACEHOLDER</div>
+    <button class="copy-btn">Copy Script</button>
   </div>
 </div>
  
@@ -180,12 +174,12 @@ vBiLsR // 2025 // MORE SOON
 <script>
 // Copy ID functionality
 document.querySelectorAll('.copy-btn').forEach(btn => {
-  btn.addEventListener('click', e => {
+  btn.addEventListener('click', () => {
     const idDiv = btn.previousElementSibling;
     const id = idDiv.dataset.id;
     navigator.clipboard.writeText(id).then(() => {
       btn.textContent = 'Copied!';
-      setTimeout(() => btn.textContent = 'Copy ID', 1000);
+      setTimeout(() => btn.textContent = 'Copy Script', 1000);
     });
   });
 });
@@ -228,6 +222,7 @@ window.addEventListener('resize', ()=>{
   canvas.height = window.innerHeight;
 });
 
+// Dynamic title
 const titles = ["o","ot","oth","othe","other"];
 let idx = 0;
 setInterval(()=>{
@@ -238,6 +233,3 @@ setInterval(()=>{
 
 </body>
 </html>
-
-
-
