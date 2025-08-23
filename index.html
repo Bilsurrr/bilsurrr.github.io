@@ -1,435 +1,149 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-<meta charset="UTF-8">
-<meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title>b</title>
-<link rel="icon" type="image/png" href="https://cdn.discordapp.com/avatars/1112838984037568613/ef91f43256a2fc51d23c3ef2e979b92e.png?size=1024">
-<style>
-@import url('https://fonts.googleapis.com/css2?family=Orbitron:wght@400;700&display=swap');
-
-* {
-  margin: 0;
-  padding: 0;
-  box-sizing: border-box;
-}
-
-body {
-  font-family: 'Orbitron', sans-serif;
-  background: linear-gradient(135deg, #1a0033, #3b0066);
-  color: #fff;
-  text-align: center;
-  position: relative;
-  min-height: 100vh;
-  padding: 20px;
-}
-
-#particles {
-  position: fixed;
-  top: 0;
-  left: 0;
-  width: 100%;
-  height: 100%;
-  z-index: 0;
-}
-
-h1 {
-  margin-top: 50px;
-  font-size: 3rem;
-  text-shadow: 0 0 10px #6600cc, 0 0 20px #9933ff;
-  position: relative;
-  z-index: 1;
-}
-
-nav {
-  margin-top: 30px;
-  position: relative;
-  z-index: 1;
-}
-
-nav a {
-  display: inline-block;
-  margin: 10px;
-  padding: 12px 25px;
-  background-color: #4b0082;
-  color: white;
-  text-decoration: none;
-  border-radius: 8px;
-  box-shadow: 0 0 10px #4b0082;
-  transition: 0.3s;
-}
-
-nav a:hover {
-  background-color: #6a0dad;
-  box-shadow: 0 0 20px #ff00ff, 0 0 40px #6a0dad;
-}
-
-.discord-section {
-  margin-top: 50px;
-  position: relative;
-  z-index: 1;
-}
-
-.discord-section h2 {
-  font-size: 2rem;
-  margin-bottom: 15px;
-  text-shadow: 0 0 10px #6600cc, 0 0 20px #ff00ff;
-}
-
-.discord-section a {
-  display: inline-block;
-  padding: 12px 25px;
-  background-color: #5865F2;
-  color: white;
-  text-decoration: none;
-  border-radius: 8px;
-  box-shadow: 0 0 10px #5865F2;
-  transition: 0.3s;
-}
-
-.discord-section a:hover {
-  background-color: #4752C4;
-  box-shadow: 0 0 20px #5865F2, 0 0 40px #4752C4;
-}
-
-/* CUSTOM MP3 PLAYER */
-.player {
-  position: fixed;
-  bottom: 60px; /* moved up a little */
-  left: 50%;
-  transform: translateX(-50%);
-  width: 90%;
-  max-width: 600px;
-  background: rgba(26, 0, 51, 0.85);
-  backdrop-filter: blur(10px);
-  border-radius: 16px;
-  box-shadow: 0 0 20px rgba(170, 0, 255, 0.6);
-  display: flex;
-  align-items: center;
-  padding: 12px 18px;
-  z-index: 2;
-  border: 1px solid rgba(170, 0, 255, 0.3);
-}
-
-.player img {
-  width: 55px;
-  height: 55px;
-  border-radius: 12px;
-  margin-right: 15px;
-  box-shadow: 0 0 10px #9900ff;
-  object-fit: cover;
-}
-
-.player .info {
-  flex: 1;
-  text-align: left;
-}
-
-.player .info h3 {
-  margin: 0;
-  font-size: 1rem;
-  color: #fff;
-}
-
-.controls {
-  display: flex;
-  align-items: center;
-  margin-top: 8px;
-}
-
-/* IMPROVED Play/Pause button */
-.play-btn {
-  width: 42px;
-  height: 42px;
-  border: none;
-  border-radius: 50%;
-  background: linear-gradient(135deg, #a200ff, #6a0dad);
-  display: flex;
-  align-items: center;
-  justify-content: center;
-  cursor: pointer;
-  margin-right: 12px;
-  box-shadow: 0 0 15px rgba(162, 0, 255, 0.7);
-  position: relative;
-  transition: all 0.3s ease;
-  overflow: hidden;
-}
-.play-btn:hover {
-  transform: scale(1.1);
-  box-shadow: 0 0 20px #ff00ff, 0 0 35px #a200ff;
-}
-.play-btn::before {
-  content: "";
-  position: absolute;
-  width: 0;
-  height: 0;
-  border-left: 14px solid #fff;
-  border-top: 9px solid transparent;
-  border-bottom: 9px solid transparent;
-  transition: all 0.2s cubic-bezier(0.68, -0.55, 0.27, 1.55);
-  transform: translateX(1px);
-}
-.play-btn.pause::before, 
-.play-btn.pause::after {
-  content: "";
-  position: absolute;
-  width: 4px;
-  height: 18px;
-  background: #fff;
-  border-radius: 2px;
-  transition: all 0.2s cubic-bezier(0.68, -0.55, 0.27, 1.55);
-}
-.play-btn.pause::before {
-  left: 13px;
-  transform: scaleY(1);
-}
-.play-btn.pause::after {
-  right: 13px;
-  transform: scaleY(1);
-}
-
-/* Pulse animation while playing */
-.play-btn.pause {
-  animation: pulse 1.5s infinite;
-}
-@keyframes pulse {
-  0% { box-shadow: 0 0 15px #a200ff, 0 0 25px #6600cc; }
-  50% { box-shadow: 0 0 25px #ff00ff, 0 0 45px #a200ff; }
-  100% { box-shadow: 0 0 15px #a200ff, 0 0 25px #6600cc; }
-}
-
-/* Add a subtle glow effect to the button */
-.play-btn::after {
-  content: '';
-  position: absolute;
-  top: -5px;
-  left: -5px;
-  right: -5px;
-  bottom: -5px;
-  border-radius: 50%;
-  background: transparent;
-  box-shadow: 0 0 20px 5px rgba(162, 0, 255, 0.5);
-  opacity: 0;
-  transition: opacity 0.3s ease;
-  z-index: -1;
-}
-
-.play-btn:hover::after {
-  opacity: 1;
-}
-
-.progress-container {
-  flex: 1;
-  height: 6px;
-  background: rgba(48, 0, 80, 0.6);
-  border-radius: 5px;
-  cursor: pointer;
-  position: relative;
-  overflow: hidden;
-}
-
-.progress {
-  background: linear-gradient(90deg, #b300ff, #ff00ff);
-  height: 100%;
-  width: 0%;
-  border-radius: 5px;
-  transition: width 0.1s linear;
-}
-
-.time {
-  font-size: 0.75rem;
-  margin-left: 10px;
-  color: #ccc;
-  min-width: 45px;
-}
-
-/* Volume control */
-.volume-container {
-  display: flex;
-  align-items: center;
-  margin-left: 15px;
-}
-
-.volume-btn {
-  background: none;
-  border: none;
-  color: #ccc;
-  cursor: pointer;
-  font-size: 1.2rem;
-  margin-right: 5px;
-}
-
-.volume-slider {
-  width: 70px;
-  height: 5px;
-  -webkit-appearance: none;
-  background: rgba(48, 0, 80, 0.6);
-  border-radius: 5px;
-  outline: none;
-}
-
-.volume-slider::-webkit-slider-thumb {
-  -webkit-appearance: none;
-  width: 12px;
-  height: 12px;
-  border-radius: 50%;
-  background: #b300ff;
-  cursor: pointer;
-  box-shadow: 0 0 5px rgba(179, 0, 255, 0.8);
-}
-
-.volume-slider::-moz-range-thumb {
-  width: 12px;
-  height: 12px;
-  border-radius: 50%;
-  background: #b300ff;
-  cursor: pointer;
-  box-shadow: 0 0 5px rgba(179, 0, 255, 0.8);
-  border: none;
-}
-</style>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>b</title>
+  <link rel="icon" type="image/png" href="https://cdn.discordapp.com/avatars/1112838984037568613/ef91f43256a2fc51d23c3ef2e979b92e.png?size=1024">
+  <style>
+    @import url('https://fonts.googleapis.com/css2?family=Orbitron:wght@400;700&display=swap');
+    * { margin: 0; padding: 0; box-sizing: border-box; }
+    body {
+      font-family: 'Orbitron', sans-serif;
+      background: linear-gradient(135deg, #1a0033, #3b0066);
+      color: #fff;
+      text-align: center;
+      position: relative;
+      min-height: 100vh;
+      padding: 20px;
+    }
+    #particles {
+      position: fixed;
+      top: 0; left: 0;
+      width: 100%; height: 100%;
+      z-index: 0;
+    }
+    h1 {
+      margin-top: 50px;
+      font-size: 3rem;
+      text-shadow: 0 0 10px #6600cc, 0 0 20px #9933ff;
+      position: relative;
+      z-index: 1;
+    }
+    nav {
+      margin-top: 30px;
+      position: relative;
+      z-index: 1;
+    }
+    nav a {
+      display: inline-block;
+      margin: 10px;
+      padding: 12px 25px;
+      background-color: #4b0082;
+      color: white;
+      text-decoration: none;
+      border-radius: 8px;
+      box-shadow: 0 0 10px #4b0082;
+      transition: 0.3s;
+    }
+    nav a:hover {
+      background-color: #6a0dad;
+      box-shadow: 0 0 20px #ff00ff, 0 0 40px #6a0dad;
+    }
+    .discord-section {
+      margin-top: 50px;
+      position: relative;
+      z-index: 1;
+    }
+    .discord-section h2 {
+      font-size: 2rem;
+      margin-bottom: 15px;
+      text-shadow: 0 0 10px #6600cc, 0 0 20px #ff00ff;
+    }
+    .discord-section a {
+      display: inline-block;
+      padding: 12px 25px;
+      background-color: #5865F2;
+      color: white;
+      text-decoration: none;
+      border-radius: 8px;
+      box-shadow: 0 0 10px #5865F2;
+      transition: 0.3s;
+    }
+    .discord-section a:hover {
+      background-color: #4752C4;
+      box-shadow: 0 0 20px #5865F2, 0 0 40px #4752C4;
+    }
+    .discord-note {
+      margin-top: 20px;
+      font-size: 1rem;
+      color: #ccc;
+      text-align: center;
+    }
+  </style>
 </head>
 <body>
+  <canvas id="particles"></canvas>
 
-<canvas id="particles"></canvas>
+  <h1>Bilsr's Stuff</h1>
+  <nav>
+    <a href="https://guns.lol/bilsr" target="_blank">GUNS.LOL</a>
+    <a href="other.html">OTHER</a>
+    <a href="credits.html">CREDITS</a>
+    <a href="archive.html">ARCHIVE</a>
+    <a href="beats.html">BEATS</a>
+  </nav>
 
-<h1>Bilsr's Stuff</h1>
-<nav>
-  <a href="https://guns.lol/bilsr" target="_blank">GUNS.LOL</a>
-  <a href="other.html">OTHER</a>
-  <a href="credits.html">CREDITS</a>
-  <a href="archive.html">ARCHIVE</a>
-  <a href="beats.html">BEATS</a>
-</nav>
+  <div class="discord-section">
+    <h2>Join the Discord Server</h2>
+    <a href="https://discord.gg/vCGCuMMqxu" target="_blank">Click Here to Join</a>
+    <p class="discord-note">discord Images expire so in credits the pics arent working rn and the audios under beats also the icon for the website will expire will find other workarounds soon</p>
+  </div>
 
-<div class="discord-section">
-  <h2>Join the Discord Server</h2>
-  <a href="https://discord.gg/vCGCuMMqxu" target="_blank">Click Here to Join</a>
-</div>
+  <script>
+    // Particles background
+    const canvas = document.getElementById('particles');
+    const ctx = canvas.getContext('2d');
+    canvas.width = window.innerWidth;
+    canvas.height = window.innerHeight;
+    const particles = [];
+    for(let i=0; i<60; i++){
+      particles.push({
+        x: Math.random()*canvas.width,
+        y: Math.random()*canvas.height,
+        r: Math.random()*2+1,
+        dx: (Math.random()-0.5)*0.5,
+        dy: (Math.random()-0.5)*0.5,
+        color: `hsla(${Math.random()*260+240}, 70%, 60%, 0.5)`
+      });
+    }
+    function animate(){
+      ctx.clearRect(0,0,canvas.width,canvas.height);
+      particles.forEach(p=>{
+        p.x += p.dx;
+        p.y += p.dy;
+        if(p.x < 0 || p.x > canvas.width) p.dx *= -1;
+        if(p.y < 0 || p.y > canvas.height) p.dy *= -1;
+        ctx.fillStyle = p.color;
+        ctx.beginPath();
+        ctx.arc(p.x,p.y,p.r,0,Math.PI*2);
+        ctx.fill();
+      });
+      requestAnimationFrame(animate);
+    }
+    animate();
+    window.addEventListener('resize', ()=>{
+      canvas.width = window.innerWidth;
+      canvas.height = window.innerHeight;
+    });
 
-<script>
-// Particles background
-const canvas = document.getElementById('particles');
-const ctx = canvas.getContext('2d');
-canvas.width = window.innerWidth;
-canvas.height = window.innerHeight;
-
-const particles = [];
-for(let i=0; i<60; i++){
-  particles.push({
-    x: Math.random()*canvas.width,
-    y: Math.random()*canvas.height,
-    r: Math.random()*2+1,
-    dx: (Math.random()-0.5)*0.5,
-    dy: (Math.random()-0.5)*0.5,
-    color: `hsla(${Math.random()*260+240}, 70%, 60%, 0.5)`
-  });
-}
-
-function animate(){
-  ctx.clearRect(0,0,canvas.width,canvas.height);
-  particles.forEach(p=>{
-    p.x += p.dx;
-    p.y += p.dy;
-    if(p.x < 0 || p.x > canvas.width) p.dx *= -1;
-    if(p.y < 0 || p.y > canvas.height) p.dy *= -1;
-    ctx.fillStyle = p.color;
-    ctx.beginPath();
-    ctx.arc(p.x,p.y,p.r,0,Math.PI*2);
-    ctx.fill();
-  });
-  requestAnimationFrame(animate);
-}
-animate();
-
-window.addEventListener('resize', ()=>{
-  canvas.width = window.innerWidth;
-  canvas.height = window.innerHeight;
-});
-
-// Animate tab title
-const titles = ["b","bi","bil","bils","bilsr","bilsr h","bilsr hu","bilsr hub"];
-let idx = 0;
-setInterval(()=>{
-  document.title = titles[idx];
-  idx = (idx+1) % titles.length;
-}, 500);
-
-// PLAYER SCRIPT
-const audio = document.getElementById('audio');
-const playPause = document.getElementById('playPause');
-const progress = document.getElementById('progress');
-const progressContainer = document.getElementById('progressContainer');
-const timeEl = document.getElementById('time');
-const volumeBtn = document.getElementById('volumeBtn');
-const volumeSlider = document.getElementById('volumeSlider');
-
-// Set initial volume
-audio.volume = volumeSlider.value;
-
-playPause.addEventListener('click', () => {
-  if(audio.paused){
-    audio.play();
-    playPause.classList.add("pause");
-  } else {
-    audio.pause();
-    playPause.classList.remove("pause");
-  }
-});
-
-audio.addEventListener('timeupdate', () => {
-  const percent = (audio.currentTime / audio.duration) * 100;
-  progress.style.width = percent + "%";
-  timeEl.textContent = formatTime(audio.currentTime) + " / " + formatTime(audio.duration);
-});
-
-progressContainer.addEventListener('click', (e) => {
-  const width = progressContainer.clientWidth;
-  const clickX = e.offsetX;
-  audio.currentTime = (clickX / width) * audio.duration;
-});
-
-// Volume control
-volumeSlider.addEventListener('input', () => {
-  audio.volume = volumeSlider.value;
-  updateVolumeIcon();
-});
-
-volumeBtn.addEventListener('click', () => {
-  if (audio.volume > 0) {
-    audio.volume = 0;
-    volumeSlider.value = 0;
-  } else {
-    audio.volume = 1;
-    volumeSlider.value = 1;
-  }
-  updateVolumeIcon();
-});
-
-function updateVolumeIcon() {
-  if (audio.volume == 0) {
-    volumeBtn.textContent = "🔇";
-  } else if (audio.volume < 0.5) {
-    volumeBtn.textContent = "🔈";
-  } else {
-    volumeBtn.textContent = "🔊";
-  }
-}
-
-function formatTime(sec){
-  if (isNaN(sec)) return "0:00";
-  const minutes = Math.floor(sec / 60);
-  const seconds = Math.floor(sec % 60).toString().padStart(2, "0");
-  return `${minutes}:${seconds}`;
-}
-
-// Update time display with total duration when metadata is loaded
-audio.addEventListener('loadedmetadata', () => {
-  timeEl.textContent = "0:00 / " + formatTime(audio.duration);
-});
-</script>
-
+    // Animate tab title
+    const titles = ["b","bi","bil","bils","bilsr","bilsr h","bilsr hu","bilsr hub"];
+    let idx = 0;
+    setInterval(()=>{
+      document.title = titles[idx];
+      idx = (idx+1) % titles.length;
+    }, 500);
+  </script>
 </body>
-
 </html>
-
